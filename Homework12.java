@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 import java.util.ArrayList;
+import java.lang.Math;
 
 public class Homework12 {
 
@@ -11,13 +12,16 @@ public class Homework12 {
 	 * variables. The constructor should create and save an
 	 * ArrayList of RectangularShape values
 	 */
-	public Homework12() {
+	 private ArrayList<RectangularShape> shapes;
+	public Homework12(ArrayList<RectangularShape> list) {
+		this.shapes = list;
 
 	}
 
 	/* Adds the parameter s to the ArrayList
 	 */
 	public void addShape(RectangularShape s) {
+		shapes.add(s);
 
 	}
 
@@ -26,6 +30,17 @@ public class Homework12 {
 	 * parameter r
 	 */
 	public int problem1(Rectangle2D r) {
+		for (int i = 0; i < shapes.size(); i++){
+			if (shapes.get(i).intersects(r)){
+				int p = (int)shapes.get(i).getHeight();
+				int a = p * 2;
+				int aa = (int)shapes.get(i).getWidth();
+				int am = aa * 2;
+				int para = a + am;
+				return para;
+			}
+			return -1;
+		}
 
 	}
 
@@ -34,6 +49,13 @@ public class Homework12 {
 	 * parameter p
 	 */
 	public int problem2(Point2D p) {
+		int numRects = 0;
+		for (int i = 0; i < shapes.size(); i++){
+			if(shapes.get(i).contains(p)){
+				numRects += 1;
+			}
+		}
+		return numRects;
 
 	}
 
@@ -41,6 +63,8 @@ public class Homework12 {
 	 * are in the ArrayList
 	 */
 	public int problem3() {
+		int numEllip = 0;
+		return 1;
 
 	}
 
@@ -48,7 +72,14 @@ public class Homework12 {
 	 * in the ArrayList intersects the parameter Line2D
 	 */
 	public boolean problem4(Line2D l) {
-
+		for(int i = 0; i < shapes.size(); i++){
+			if(shapes.get(i) == (Rectangle2D)shapes.get(i)){
+				if(shapes.get(i).intersectsLine(l)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/* Return the total area of the RectangularShape objects in
@@ -60,7 +91,17 @@ public class Homework12 {
 	 * counts for both (i.e. do not account for intersection)
 	 */
 	public double problem5() {
-
+		double totArea = 0;
+		for(int i = 0; i < shapes.size(); i++){
+			if(getFrame(shapes.get(i)).equals(shapes.get(i))){
+				double area = (shapes.get(i).getWidth() * (shapes.get(i).getHeight()));
+				totArea += area;
+			} else {
+				double area = Math.PI * shapes.get(i).getWidth() * shapes.get(i).getHeight();
+				totArea += area;
+			}
+		}
+		return totArea;
 	}
 
 	public static void main(String[] args) {
