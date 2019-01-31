@@ -13,8 +13,8 @@ public class Homework12 {
 	 * ArrayList of RectangularShape values
 	 */
 	 private ArrayList<RectangularShape> shapes;
-	public Homework12(ArrayList<RectangularShape> list) {
-		this.shapes = list;
+	public Homework12() {
+		shapes = new ArrayList<RectangularShape>();
 
 	}
 
@@ -30,18 +30,13 @@ public class Homework12 {
 	 * parameter r
 	 */
 	public int problem1(Rectangle2D r) {
+		int tot = 0;
 		for (int i = 0; i < shapes.size(); i++){
 			if (shapes.get(i).intersects(r)){
-				int p = (int)shapes.get(i).getHeight();
-				int a = p * 2;
-				int aa = (int)shapes.get(i).getWidth();
-				int am = aa * 2;
-				int para = a + am;
-				return para;
+				tot++;
 			}
-			return -1;
 		}
-
+	return tot;
 	}
 
 	/* Returns the number of RectangularShape objects
@@ -50,9 +45,9 @@ public class Homework12 {
 	 */
 	public int problem2(Point2D p) {
 		int numRects = 0;
-		for (int i = 0; i < shapes.size(); i++){
-			if(shapes.get(i).contains(p)){
-				numRects += 1;
+		for (RectangularShape b : shapes){
+			if(b.contains(p) == false){
+				numRects++;
 			}
 		}
 		return numRects;
@@ -63,18 +58,22 @@ public class Homework12 {
 	 * are in the ArrayList
 	 */
 	public int problem3() {
-		int numEllip = 0;
-		return 1;
-
+		int ellipseTot = 0;
+		for (int i = 0; i < shapes.size(); i++){
+			if (shapes.get(i) instanceof Ellipse2D){
+				ellipseTot++;
+			}
+		}
+		return ellipseTot;
 	}
 
 	/* Returns true if any of the Rectangle2D objects
 	 * in the ArrayList intersects the parameter Line2D
 	 */
 	public boolean problem4(Line2D l) {
-		for(int i = 0; i < shapes.size(); i++){
-			if(shapes.get(i) == (Rectangle2D)shapes.get(i)){
-				if(shapes.get(i).intersectsLine(l)){
+		for(RectangularShape i : shapes){
+			if(i instanceof Rectangle2D){
+				if(((Rectangle2D)(i)).intersectsLine(l)){
 					return true;
 				}
 			}
@@ -92,15 +91,16 @@ public class Homework12 {
 	 */
 	public double problem5() {
 		double totArea = 0;
-		for(int i = 0; i < shapes.size(); i++){
-			if(getFrame(shapes.get(i)).equals(shapes.get(i))){
-				double area = (shapes.get(i).getWidth() * (shapes.get(i).getHeight()));
-				totArea += area;
-			} else {
-				double area = Math.PI * shapes.get(i).getWidth() * shapes.get(i).getHeight();
+		for(RectangularShape i : shapes){
+			if(i instanceof Rectangle2D){
+				double area = ((Rectangle2D)(i)).getWidth() * ((Rectangle2D)(i)).getHeight();
 				totArea += area;
 			}
+			if (i instanceof Ellipse2D){
+				double areaE = Math.PI * Math.pow(((Ellipse2D)(i)).getWidth(), 2);
+				totArea += areaE;
 		}
+	}
 		return totArea;
 	}
 
