@@ -98,7 +98,7 @@ public class Homework12 {
 			}
 			if (i instanceof Ellipse2D){
 				double area = Math.PI * Math.pow(((Ellipse2D)(i)).getWidth(), 2);
-				totArea += areaE;
+				totArea += area;
 		}
 	}
 		return totArea;
