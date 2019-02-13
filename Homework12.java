@@ -96,6 +96,7 @@ public class Homework12 {
 				double area = ((Rectangle2D)(i)).getWidth() * ((Rectangle2D)(i)).getHeight();
 				totArea += area;
 			}
+			// Not all ellipses are circles
 			if (i instanceof Ellipse2D){
 				double area = Math.PI * Math.pow(((Ellipse2D)(i)).getWidth(), 2);
 				totArea += area;
